@@ -1,0 +1,481 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('./theme.css');
+
+/* =============================================
+   GLOBAL RESET & THEME STABILIZATION
+   ============================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, .page-wrapper, .main-content, .home-page {
+  background-image: none !important;
+  background-color: var(--bg-main) !important;
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Global scrollbar ──────────────────────── */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(10, 10, 15, 0.6);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-primary-hover) 100%);
+}
+::-webkit-scrollbar-corner { background: var(--bg-main); }
+* { scrollbar-width: thin; scrollbar-color: var(--color-primary) var(--bg-main); }
+
+/* ─── Typography & Base Styles ──────────────── */
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 650;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+code, pre, .stat-value, .badge, .status-badge, .metric, .sub-chip, .logo-subtitle, .participants-table td, .page-info, .ms-box span {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+code {
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+button, .btn, label, .nav-link, .admin-section-label, .page-eyebrow {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ══════════════════════════════════════════════
+   LIGHT MODE
+   Inverts the dark editorial system:
+   • ink (#0a0a0f)  → paper (#f0ede8)
+   • white          → near-black (#0d0d14)
+   • rgba-alpha whites → rgba-alpha blacks
+   ══════════════════════════════════════════════ */
+
+/* ── 1. Root variable flips ─────────────────── */
+[data-theme="light"] {
+  --bg-main: #FAFBFC;
+  --bg-soft: #F1F5F9;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --color-primary: #6366F1;
+  --color-primary-hover: #4F46E5;
+  --color-accent: #38BDF8;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --border-soft: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.15);
+  --glass-border: 1px solid var(--border-soft);
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, #818CF8 100%);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1), transparent 60%);
+  color-scheme: light;
+}
+
+/* ── 2. Body / html ─────────────────────────── */
+[data-theme="light"] html,
+[data-theme="light"] body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+/* ── 3. Scrollbar (light override) ─────────── */
+[data-theme="light"] ::-webkit-scrollbar-track { background: var(--bg-soft); }
+[data-theme="light"] ::-webkit-scrollbar-thumb { border-color: rgba(240,253,244,0.6); }
+[data-theme="light"] * { scrollbar-color: var(--color-primary) var(--bg-soft); }
+
+[data-theme="light"] .admin-analytics-page,
+[data-theme="light"] .manage-events-page,
+[data-theme="light"] .manage-initiatives-page,
+[data-theme="light"] .manage-gallery-page,
+[data-theme="light"] .manage-achievements-page,
+[data-theme="light"] .submissions-page,
+[data-theme="light"] .settings-page,
+[data-theme="light"] .admin-home-page,
+[data-theme="light"] .admin-login-page,
+[data-theme="light"] .home-page {
+  background: var(--bg-main);
+  background-image: none !important;
+}
+
+/* Remove grids/glows for all pages */
+.admin-analytics-page::before, .admin-analytics-page::after,
+.manage-events-page::before, .manage-events-page::after,
+.manage-initiatives-page::before, .manage-initiatives-page::after,
+.manage-gallery-page::before, .manage-gallery-page::after,
+.manage-achievements-page::before, .manage-achievements-page::after,
+.submissions-page::before, .submissions-page::after,
+.settings-page::before, .settings-page::after,
+.admin-home-page::before, .admin-home-page::after {
+  display: none !important;
+}
+
+/* ── 7. Navbars ─────────────────────────────── */
+[data-theme="light"] .navbar,
+[data-theme="light"] .admin-navbar {
+  background: var(--bg-card) !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.15) !important;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .navbar.scrolled,
+[data-theme="light"] .admin-navbar.scrolled {
+  background: var(--bg-card) !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.25) !important;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .mobile-menu,
+[data-theme="light"] .admin-mobile-menu {
+  background: rgba(245, 245, 255, 0.98) !important;
+  border-top-color: rgba(99, 102, 241, 0.1) !important;
+  border-bottom-color: rgba(99, 102, 241, 0.15) !important;
+  box-shadow: 0 20px 48px rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Nav link colors */
+[data-theme="light"] .nav-link,
+[data-theme="light"] .admin-nav-links a,
+[data-theme="light"] .mobile-nav-link {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .admin-nav-links a:hover,
+[data-theme="light"] .mobile-nav-link:hover {
+  color: var(--text-secondary) !important;
+  background: var(--bg-card) !important;
+}
+
+[data-theme="light"] .nav-link.active,
+[data-theme="light"] .admin-nav-links a.active,
+[data-theme="light"] .mobile-nav-link.active {
+  background-color: rgba(99, 102, 241, 0.12) !important;
+  color: var(--color-primary) !important;
+  border-radius: 8px !important;
+}
+
+[data-theme="light"] .logo-subtitle { color: var(--text-secondary) !important; }
+[data-theme="light"] .mobile-menu-header h3 { color: var(--text-secondary) !important; }
+[data-theme="light"] .mobile-close-btn,
+[data-theme="light"] .admin-mobile-close {
+  border-color: rgba(99, 102, 241, 0.1) !important;
+  background: rgba(99, 102, 241, 0.04) !important;
+  color: var(--text-secondary) !important;
+}
+[data-theme="light"] .menu-toggle,
+[data-theme="light"] .admin-menu-toggle {
+  border-color: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .mobile-admin-section,
+[data-theme="light"] .admin-mobile-header {
+  border-color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .admin-mobile-links a {
+  color: var(--text-secondary) !important;
+  border-left-color: transparent !important;
+}
+[data-theme="light"] .admin-mobile-links a:hover {
+  color: #0d0d14 !important;
+  background: var(--bg-card) !important;
+}
+[data-theme="light"] .admin-mobile-links a.active {
+  color: #4F46E5 !important;
+  background: rgba(99, 102, 241, 0.08) !important;
+  border-left-color: #6366F1 !important;
+}
+
+/* ── 8. Glass form panels & cards ───────────── */
+[data-theme="light"] .achieve-form,
+[data-theme="light"] .event-form,
+[data-theme="light"] .gallery-form,
+[data-theme="light"] .initiative-form,
+[data-theme="light"] .settings-card {
+  background: var(--bg-card) !important;
+  border-color: var(--text-secondary) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* ── 9. List tiles ──────────────────────────── */
+[data-theme="light"] .achieve-item,
+[data-theme="light"] .event-item,
+[data-theme="light"] .gallery-item,
+[data-theme="light"] .initiative-item {
+  background: var(--bg-card) !important;
+  border-bottom-color: var(--text-secondary) !important;
+}
+[data-theme="light"] .achieve-item:hover,
+[data-theme="light"] .event-item:hover,
+[data-theme="light"] .gallery-item:hover,
+[data-theme="light"] .initiative-item:hover {
+  background: var(--bg-card) !important;
+}
+
+[data-theme="light"] .achieve-list,
+[data-theme="light"] .events-list,
+[data-theme="light"] .gallery-list,
+[data-theme="light"] .initiatives-list {
+  border-color: var(--text-secondary) !important;
+}
+
+/* ── 10. Inputs ─────────────────────────────── */
+[data-theme="light"] input[type="text"],
+[data-theme="light"] input[type="number"],
+[data-theme="light"] input[type="email"],
+[data-theme="light"] input[type="password"],
+[data-theme="light"] input[type="date"],
+[data-theme="light"] input[type="time"],
+[data-theme="light"] input[type="file"],
+[data-theme="light"] textarea,
+[data-theme="light"] select,
+[data-theme="light"] .settings-input,
+[data-theme="light"] .gallery-input {
+  background: var(--bg-card) !important;
+  border-color: var(--text-secondary) !important;
+  color: #0d0d14 !important;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder { color: var(--text-secondary) !important; }
+
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="light"] select:focus,
+[data-theme="light"] .settings-input:focus,
+[data-theme="light"] .gallery-input:focus {
+  border-color: #6366F1 !important;
+  background: var(--bg-card) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
+}
+
+[data-theme="light"] input[type="file"] {
+  color: var(--text-secondary) !important;
+}
+
+/* ── 11. Submission blocks ──────────────────── */
+[data-theme="light"] .event-submission-block {
+  background: var(--bg-card) !important;
+  border-color: var(--text-secondary) !important;
+}
+[data-theme="light"] .event-sub-header {
+  background: var(--bg-card) !important;
+  border-bottom-color: var(--text-secondary) !important;
+}
+[data-theme="light"] .sub-person {
+  background: var(--bg-card) !important;
+  border-color: var(--text-secondary) !important;
+}
+[data-theme="light"] .sub-chip {
+  background: var(--bg-card) !important;
+  border-color: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
+}
+[data-theme="light"] .sub-chip.vol {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  color: #4F46E5 !important;
+}
+[data-theme="light"] .sub-chip.part {
+  background: rgba(167, 139, 250, 0.1) !important;
+  border-color: rgba(167, 139, 250, 0.28) !important;
+  color: #7C3AED !important;
+}
+[data-theme="light"] .sub-col:first-child { border-right-color: var(--text-secondary) !important; }
+[data-theme="light"] .sub-person-name { color: #0d0d14 !important; }
+[data-theme="light"] .sub-person-meta { color: var(--text-secondary) !important; }
+[data-theme="light"] .sub-col-title,
+[data-theme="light"] .submissions-state { color: var(--text-secondary) !important; }
+[data-theme="light"] .submissions-state { border-color: var(--text-secondary) !important; background: var(--bg-card) !important; }
+
+/* ── 12. Meta chips & badges ────────────────── */
+[data-theme="light"] .achieve-meta span,
+[data-theme="light"] .event-details span,
+[data-theme="light"] .gallery-details span {
+  background: var(--bg-card) !important;
+  border-color: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ── 13. Page section labels (eyebrow) ──────── */
+[data-theme="light"] .page-eyebrow,
+[data-theme="light"] .submissions-eyebrow,
+[data-theme="light"] .settings-eyebrow { color: #6366F1 !important; }
+[data-theme="light"] .page-eyebrow::before,
+[data-theme="light"] .submissions-eyebrow::before,
+[data-theme="light"] .settings-eyebrow::before { background: #6366F1 !important; }
+
+/* ── 14. Form labels ─────────────────────────── */
+[data-theme="light"] .form-label,
+[data-theme="light"] .gallery-form-label,
+[data-theme="light"] .settings-field-label,
+[data-theme="light"] .social-network-label { color: var(--text-secondary) !important; }
+
+/* ── 15. Stat tiles (admin home) ────────────── */
+[data-theme="light"] .stat-tile {
+  background: var(--bg-card) !important;
+  border-color: var(--text-secondary) !important;
+}
+[data-theme="light"] .stat-tile:hover { background: var(--bg-card) !important; }
+[data-theme="light"] .stat-watermark { color: var(--text-secondary) !important; }
+[data-theme="light"] .stat-value { color: #0d0d14 !important; }
+[data-theme="light"] .stat-label { color: var(--text-secondary) !important; }
+
+/* ── 16. Empty states ────────────────────────── */
+[data-theme="light"] .no-events,
+[data-theme="light"] .no-gallery,
+[data-theme="light"] .no-achievements {
+  border-color: var(--text-secondary) !important;
+}
+[data-theme="light"] .no-events-icon,
+[data-theme="light"] .no-gallery-icon,
+[data-theme="light"] .no-achievements-icon {
+  background: var(--bg-card) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+/* ── 17. Ghost action buttons ────────────────── */
+[data-theme="light"] .achieve-cancel-btn,
+[data-theme="light"] .cancel-btn {
+  border-color: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
+}
+[data-theme="light"] .achieve-cancel-btn:hover,
+[data-theme="light"] .cancel-btn:hover {
+  border-color: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
+  background: var(--bg-card) !important;
+}
+
+/* ── 18. Home page (public) ──────────────────── */
+[data-theme="light"] .home-page { background: #f5f3ee; color: var(--bg-main); }
+
+/* Theme toggle button (shared) */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 3px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  border-color: #6366F1;
+  color: #6366F1;
+  background: rgba(99, 102, 241, 0.08);
+}
+
+[data-theme="light"] .theme-toggle-btn {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(99, 102, 241, 0.08); /* Indigo tint */
+}
+
+/* ══════════════════════════════════════════════
+   MODERN SLATE & VIOLET THEME OVERRIDES
+   Rounding, shadows and micro-interactions
+   ══════════════════════════════════════════════ */
+.stat-card, .event-info-section, .report-section, .action-card, .stat-tile, .analytics-controls, .report-event-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+  transition: transform 0.3s var(--ease-out-expo), border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.stat-card:hover, .event-info-section:hover, .report-section:hover, .action-card:hover, .stat-tile:hover {
+  transform: scale(1.02) !important;
+  border-color: var(--color-primary) !important;
+}
+
+[data-theme="light"] .stat-card, [data-theme="light"] .event-info-section, [data-theme="light"] .report-section, [data-theme="light"] .analytics-controls {
+  background: #FFFFFF !important;
+}
+
+.participants-table th:first-child { border-top-left-radius: 12px; }
+.participants-table th:last-child { border-top-right-radius: 12px; }
+
+/* Global Heading Normalization: Reset all nested spans/ems and decorative effects */
+h1 span, h2 span, h3 span, h1 em, h2 em, h3 em,
+.page-title span, .page-heading span, .page-title em, .page-heading em,
+.submissions-title em, .admin-analytics-title em, .settings-title em, .manage-events-title em {
+  font-family: var(--font-primary) !important;
+  font-weight: inherit !important;
+  color: inherit !important;
+  font-style: normal !important;
+  text-transform: none !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  -webkit-text-stroke: 0 !important;
+  letter-spacing: inherit !important;
+}
+
+/* Standardized Bold Heading Style for Admin Pages */
+.page-title, .page-heading, .list-title, .manage-events-title, .submissions-title, .admin-analytics-title, .settings-title, h1 {
+  font-family: var(--font-primary) !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  color: var(--text-primary) !important;
+  margin-bottom: 1rem !important;
+  font-style: normal !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  text-transform: none !important;
+}
